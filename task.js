@@ -12,18 +12,18 @@ console.log(pullDownMenu); // 動作確認用
 
 // マウスが乗ったら表示
 pullDownButton.addEventListener("mouseenter", () => {
-  console.log("マウスが乗りました！");
-  pullDownMenu.classList.remove("hidden");
+    console.log("マウスが乗りました！");
+    pullDownMenu.classList.remove("hidden");
 });
 
 // プルダウンからマウスが離れたら非表示
 pullDownMenu.addEventListener("mouseleave", () => {
-  console.log("マウスがプルダウンから外れました！");
-  pullDownMenu.classList.add("hidden");
+    console.log("マウスがプルダウンから外れました！");
+    pullDownMenu.classList.add("hidden");
 });
 
 // クリックされたら表示切り替え
 pullDownButton.addEventListener("click", () => {
-  console.log("クリックされました！");
-  pullDownMenu.classList.toggle("hidden");
+    console.log("クリックされました！");
+    pullDownMenu.classList.toggle("hidden");
 });

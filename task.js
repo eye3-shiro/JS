@@ -11,19 +11,21 @@ const pullDownMenu = document.getElementById("pull-down");
 console.log(pullDownMenu); // 動作確認用
 
 // マウスが乗ったら表示
-pullDownButton.addEventListener("mouseenter", () => {
-    console.log("マウスが乗りました！");
-    pullDownMenu.classList.remove("hidden");
-});
+pullDownButton.addEventListener("mouseover", function(){
+    pullDownButton.setAttribute("style","background-color:blue;");
+    console.log("マウスオーバーで背景色を青に変更しました");
+})
+
 
 // プルダウンからマウスが離れたら非表示
-pullDownMenu.addEventListener("mouseleave", () => {
-    console.log("マウスがプルダウンから外れました！");
-    pullDownMenu.classList.add("hidden");
-});
+pullDownButton.addEventListener("mouseout", function(){
+    pullDownButton.removeAttribute("style","background-color:red;");
+    console.log("マウスアウトで背景色を元に戻しました");
+})
 
 // クリックされたら表示切り替え
-pullDownButton.addEventListener("click", () => {
-    console.log("クリックされました！");
+pullDownButton.addEventListener("click", function(){
+    pullDownButton.setAttribute("style","background-color:green;");
+    console.log("クリックで背景色を緑に変更しました");
     pullDownMenu.classList.toggle("hidden");
-});
+})

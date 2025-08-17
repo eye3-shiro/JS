@@ -1,35 +1,41 @@
-// リスト項目を取得（確認用ログ付き）
-const lists = document.getElementsByClassName("pull-down-list");
-console.log(lists);
+function pullDown() {
+  // リスト項目
+  const items = document.querySelectorAll(".pull-down-list");
+  // 選択中の表示
+  const currentList = document.getElementById("current-list");
+  // トグルボタンとメニュー
+  const pullDownButton  = document.getElementById("lists");
+  const pullDownParents = document.getElementById("pull-down");
 
-// 「リスト」ボタンを取得
-const pullDownButton = document.getElementById("lists");
-console.log(pullDownButton); // 動作確認用
+  // 見た目（任意）
+  pullDownButton.addEventListener("mouseover", function () {
+    this.style.backgroundColor = "blue";
+  });
+  pullDownButton.addEventListener("mouseout", function () {
+    this.style.backgroundColor = ""; // 元に戻す
+  });
 
-// プルダウンメニュー（ul要素）を取得
-const pullDownParents = document.getElementById("pull-down");
-console.log(pullDownParents); // 動作確認用
+  // メニューの開閉（style.displayで単純に）
+  pullDownButton.addEventListener("click", function () {
+    const isOpen = pullDownParents.style.display === "block";
+    pullDownParents.style.display = isOpen ? "none" : "block";
+  });
 
-// マウスが乗ったら表示
-pullDownButton.addEventListener("mouseover", function(){
-    this.setAttribute("style","background-color:blue;");
-    console.log("マウスオーバーで背景色を青に変更しました");
-})
+  // 各リストクリックで表示更新＆遷移
+  items.forEach((item) => {
+    item.addEventListener("click", () => {
+      // spanに選択中の文字を表示
+      currentList.textContent = item.textContent.trim();
 
+      // data-url があれば遷移
+      const url = item.dataset.url;
+      if (url) {
+        // メニューを閉じてから遷移（任意）
+        pullDownParents.style.display = "none";
+        window.location.href = url;
+      }
+    });
+  });
+}
 
-// プルダウンからマウスが離れたら非表示
-pullDownButton.addEventListener("mouseout", function(){
-    this.removeAttribute("style","background-color:red;");
-    console.log("マウスアウトで背景色を元に戻しました");
-})
-
-// クリックされたら表示切り替え
-pullDownButton.addEventListener('click', function(){
-    if (pullDownParents.getAttribute("style") == "display:block;"){
-        pullDownParents.removeAttribute("style","display:block;")
-        console.log("非表示")
-    }else{
-        pullDownParents.setAttribute("style","display:block;")
-        console.log("表示")
-    }
-})
+window.addEventListener("load", pullDown);
